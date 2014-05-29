@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
         >
+    <TextView android:id="@+id/budget_name"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:textSize="20sp"
+            />
+
     <TextView
-            android:layout_width="fill_parent"
+            android:id="@+id/remaining_cash"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World, BudgetActivity"
+            android:gravity="center"
+            android:textSize="90sp"
+            />
+
+    <TextView android:id="@+id/total_cash"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+            />
+
+    <Button android:id="@+id/add_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+"
+            />
+
+    <ListView android:id="@+id/item_list"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              >
+    </ListView>
+
+    <Button android:id="@+id/add_item_button"
+            android:layout_width="fill_parent"
+            android:layout_height="20sp"
+
             />
 </LinearLayout>
 

@@ -14,11 +14,18 @@ public class Budget {
 
     public Budget(String name){
         this.name = name;
+        total = 0;
+
+        items = new ArrayList<Item>();
+        subBudgets = new ArrayList<Budget>();
     }
 
     public Budget(String name, double total){
         this.name = name;
         this.total = total;
+        this.remaining = total;
+        items = new ArrayList<Item>();
+        subBudgets = new ArrayList<Budget>();
     }
 
     public boolean isOverBudget(){
@@ -26,11 +33,6 @@ public class Budget {
             return true;
         else
             return false;
-    }
-
-    //Might not need this at the moment
-    public void save(){
-
     }
 
     public void addSubBudget(Budget budget){
@@ -47,18 +49,29 @@ public class Budget {
     }
 
     public void addItem(Item item){
+        if(item != null) {
+
         items.add(item);
         remaining = calculateRemaining();
+
+        }
     }
 
     public void removeItem(String name){
-        for(int itemIndex = 0; itemIndex < subBudgets.size(); itemIndex++){
+        for(int itemIndex = 0; itemIndex < items.size(); itemIndex++){
 
             if(items.get(itemIndex).name() ==  name)
                 items.remove(itemIndex);
         }
     }
 
+    public ArrayList<Item> getBudgetItems(){
+        return items;
+    }
+
+    public ArrayList<Budget> getSubBudgets(){
+        return subBudgets;
+    }
     public double getRemaining(){
         return remaining;
     }
@@ -66,6 +79,7 @@ public class Budget {
     public double getTotal(){
         return total;
     }
+
     public String name(){
         return name;
     }
@@ -73,14 +87,21 @@ public class Budget {
     private double calculateRemaining(){
         double sum = 0;
 
-        for(int budgetIndex =0; budgetIndex < subBudgets.size(); budgetIndex++){
-            sum += subBudgets.get(budgetIndex).getRemaining();
-        }
+        if(total == 0) {
+            for (int budgetIndex = 0; budgetIndex < subBudgets.size(); budgetIndex++) {
+                sum += subBudgets.get(budgetIndex).getRemaining();
+            }
 
-        for(int itemIndex = 0; itemIndex < items.size(); itemIndex++){
-            sum += items.get(itemIndex).cost();
+            for (int itemIndex = 0; itemIndex < items.size(); itemIndex++) {
+                sum += items.get(itemIndex).cost();
+            }
         }
-
+        else{
+            for (int itemIndex = 0; itemIndex < items.size(); itemIndex++) {
+                sum += items.get(itemIndex).cost();
+            }
+            sum = total + sum;
+        }
         return sum;
     }
 
