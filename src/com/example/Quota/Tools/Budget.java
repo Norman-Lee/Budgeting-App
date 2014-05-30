@@ -1,8 +1,11 @@
 package com.example.Quota.Tools;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Budget {
+public class Budget implements Parcelable {
 
     private String name;
 
@@ -26,6 +29,14 @@ public class Budget {
         this.remaining = total;
         items = new ArrayList<Item>();
         subBudgets = new ArrayList<Budget>();
+    }
+
+    private Budget(Parcel in){
+        name =  in.readString();
+        total = in.readDouble();
+        remaining = in.readDouble();
+        in.readTypedList(subBudgets,Budget.CREATOR);
+        in.readTypedList(items, Item.CREATOR);
     }
 
     public boolean isOverBudget(){
@@ -72,6 +83,7 @@ public class Budget {
     public ArrayList<Budget> getSubBudgets(){
         return subBudgets;
     }
+
     public double getRemaining(){
         return remaining;
     }
@@ -104,5 +116,31 @@ public class Budget {
         }
         return sum;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeDouble(total);
+        dest.writeDouble(remaining);
+        dest.writeTypedList(subBudgets);
+        dest.writeTypedList(items);
+    }
+
+    public static final Creator<Budget> CREATOR = new Creator<Budget>(){
+        @Override
+        public Budget createFromParcel(Parcel source) {
+            return new Budget(source);
+        }
+
+        @Override
+        public Budget[] newArray(int size) {
+            return new Budget[size];
+        }
+    };
 
 }
