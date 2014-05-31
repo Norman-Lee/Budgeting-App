@@ -30,6 +30,8 @@ public class AddItemActivity extends Activity {
 
         if(nameEdit.getText() != null && costEdit.getText() != null) {
             name = nameEdit.getText().toString();
+
+            //Need a null check here
             cost = Double.parseDouble(costEdit.getText().toString());
 
             Item returnItem = new Item(name, cost);

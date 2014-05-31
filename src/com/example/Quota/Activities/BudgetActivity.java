@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.Quota.R;
@@ -22,17 +23,15 @@ public class BudgetActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        if(getIntent().getExtras() != null){
+        ListView list = (ListView) findViewById(R.id.item_list);
+        list.setAdapter(new BudgetItemAdapter(this,mainBudget.getBudgetItems()));
 
-            Intent intent = getIntent();
-            Item item = intent.getParcelableExtra("newItem");
-
-            mainBudget.addItem(item);
-
-            ListView list = (ListView) findViewById(R.id.item_list);
-            list.setAdapter(new BudgetItemAdapter(this,mainBudget.getBudgetItems()));
-
-        }
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mainBudget.removeItem(position);
+            }
+        });
 
 
         TextView textView = (TextView) findViewById(R.id.budget_name);
@@ -58,8 +57,31 @@ public class BudgetActivity extends Activity {
 
     public void editItem(View view){
         Intent addItemIntent = new Intent(this, AddItemActivity.class);
-        //addItemIntent.setAction(Intent.ACTION_INSERT);
         startActivity(addItemIntent);
     }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+
+        if(intent.getExtras() != null){
+
+            TextView textView;
+
+            Item item = intent.getParcelableExtra("newItem");
+
+            mainBudget.addItem(item);
+
+            ListView list = (ListView) findViewById(R.id.item_list);
+            list.setAdapter(new BudgetItemAdapter(this,mainBudget.getBudgetItems()));
+
+            textView = (TextView) findViewById(R.id.remaining_cash);
+            String remainder = "$" + String.valueOf(mainBudget.getRemaining());
+            textView.setText(remainder);
+
+        }
+    }
+
+
 
 }

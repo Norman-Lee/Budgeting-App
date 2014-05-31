@@ -21,6 +21,7 @@ public class BudgetItemAdapter extends BaseAdapter {
         layoutInflater = layoutInflater.from(context);
     }
 
+
     @Override
     public int getCount() {
         return itemData.size();
@@ -54,7 +55,6 @@ public class BudgetItemAdapter extends BaseAdapter {
 
         return convertView;
     }
-
 
     static class ViewHolder{
         TextView nameView;
