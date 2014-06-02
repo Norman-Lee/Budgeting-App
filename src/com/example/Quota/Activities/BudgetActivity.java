@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
+import android.view.*;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.Quota.R;
@@ -26,13 +26,7 @@ public class BudgetActivity extends Activity {
         ListView list = (ListView) findViewById(R.id.item_list);
         list.setAdapter(new BudgetItemAdapter(this,mainBudget.getBudgetItems()));
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mainBudget.removeItem(position);
-            }
-        });
-
+        registerForContextMenu(list);
 
         TextView textView = (TextView) findViewById(R.id.budget_name);
         textView.setText(String.valueOf(mainBudget.name()));
@@ -82,6 +76,34 @@ public class BudgetActivity extends Activity {
         }
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
 
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.edit_item, menu);
+    }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        ListView list = (ListView) findViewById(R.id.item_list);
+        switch(item.getItemId()){
+            case R.id.delete_item:
+                mainBudget.removeItem(info.position);
+                ((BaseAdapter)list.getAdapter()).notifyDataSetChanged();
+
+                TextView textView = (TextView) findViewById(R.id.remaining_cash);
+                String remainder = "$" + String.valueOf(mainBudget.getRemaining());
+                textView.setText(remainder);
+
+                return true;
+            case R.id.edit_item:
+                
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+
+    }
 }

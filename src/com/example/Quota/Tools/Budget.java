@@ -78,6 +78,7 @@ public class Budget implements Parcelable {
 
     public void removeItem(int position){
         items.remove(position);
+        remaining = calculateRemaining();
     }
 
     public ArrayList<Item> getBudgetItems(){
