@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Quota</string>
+    <string name="edit_item_text">Done Editing</string>
+    <string name="add_item_text">Add to Budget</string>
 </resources>

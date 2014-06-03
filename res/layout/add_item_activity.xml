@@ -53,12 +53,10 @@
                 />
                   </LinearLayout>
 
-        <Button android:id="@+id/confirm_add"
+        <Button android:id="@+id/confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:onClick="addItem"
-                android:text="Add to Budget"
                 />
 
 

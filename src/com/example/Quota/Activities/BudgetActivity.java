@@ -49,8 +49,9 @@ public class BudgetActivity extends Activity {
         return super.onTouchEvent(event);
     }
 
-    public void editItem(View view){
+    public void addItem(View view){
         Intent addItemIntent = new Intent(this, AddItemActivity.class);
+        addItemIntent.setAction(Intent.ACTION_INSERT);
         startActivity(addItemIntent);
     }
 
@@ -62,9 +63,16 @@ public class BudgetActivity extends Activity {
 
             TextView textView;
 
-            Item item = intent.getParcelableExtra("newItem");
+            if(intent.getAction() == Intent.ACTION_INSERT) {
+                Item item = intent.getParcelableExtra("newItem");
+                mainBudget.addItem(item);
+            }
+            else if(intent.getAction() == Intent.ACTION_EDIT){
+                int position = intent.getIntExtra("position", -1);
+                Item newItem = intent.getParcelableExtra("editItem");
 
-            mainBudget.addItem(item);
+                mainBudget.editItem(position, newItem);
+            }
 
             ListView list = (ListView) findViewById(R.id.item_list);
             list.setAdapter(new BudgetItemAdapter(this,mainBudget.getBudgetItems()));
@@ -98,8 +106,13 @@ public class BudgetActivity extends Activity {
                 textView.setText(remainder);
 
                 return true;
+
             case R.id.edit_item:
-                
+                    Intent intent = new Intent(this, AddItemActivity.class);
+                    intent.setAction(Intent.ACTION_EDIT);
+                    intent.putExtra("position", info.position);
+                    intent.putExtra("editItem", mainBudget.getItem(info.position));
+                    startActivity(intent);
                 return true;
             default:
                 return super.onContextItemSelected(item);

@@ -68,12 +68,21 @@ public class Budget implements Parcelable {
         }
     }
 
+    public void editItem(int position, Item item){
+        items.set(position, item);
+        remaining = calculateRemaining();
+    }
+
     public void removeItem(String name){
         for(int itemIndex = 0; itemIndex < items.size(); itemIndex++){
 
             if(items.get(itemIndex).name() ==  name)
                 items.remove(itemIndex);
         }
+    }
+
+    public Item getItem(int position){
+        return items.get(position);
     }
 
     public void removeItem(int position){

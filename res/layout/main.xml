@@ -28,7 +28,7 @@
     <Button android:id="@+id/add_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="editItem"
+            android:onClick="addItem"
             android:text="+"
             />
 
