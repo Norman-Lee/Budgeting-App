@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import com.example.Quota.R;
+import com.example.Quota.Tools.Actions;
 import com.example.Quota.Tools.Item;
 
 import java.util.StringTokenizer;
@@ -25,7 +26,7 @@ public class AddItemActivity extends Activity {
         Intent intent = getIntent();
         Button button = (Button) findViewById(R.id.confirm);
 
-        if(intent.getAction() == Intent.ACTION_INSERT){
+        if(intent.getAction() == Actions.ACTION_ADD_ITEM){
             button.setText(R.string.add_item_text);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -34,7 +35,7 @@ public class AddItemActivity extends Activity {
                 }
             });
         }
-        else if(intent.getAction() == Intent.ACTION_EDIT){
+        else if(intent.getAction() == Actions.ACTION_EDIT_ITEM){
             button.setText(R.string.edit_item_text);
 
             Item item = intent.getParcelableExtra("editItem");
@@ -72,7 +73,7 @@ public class AddItemActivity extends Activity {
             Item returnItem = new Item(name, cost);
 
             Intent returnItemIntent = new Intent(this, BudgetActivity.class);
-            returnItemIntent.setAction(Intent.ACTION_INSERT);
+            returnItemIntent.setAction(Actions.ACTION_ADD_ITEM);
             returnItemIntent.putExtra("newItem", returnItem);
             startActivity(returnItemIntent);
 
@@ -91,7 +92,7 @@ public class AddItemActivity extends Activity {
             Item returnItem = new Item(name, cost);
 
             Intent returnItemIntent = new Intent(this, BudgetActivity.class);
-            returnItemIntent.setAction(Intent.ACTION_EDIT);
+            returnItemIntent.setAction(Actions.ACTION_EDIT_ITEM);
             returnItemIntent.putExtra("position", position);
             returnItemIntent.putExtra("editItem", returnItem);
             startActivity(returnItemIntent);

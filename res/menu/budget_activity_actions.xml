@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      >
+    <item android:id="@+id/add_subBudget"
+          android:title="Add Sub-Budget"
+          android:icon="@drawable/ic_action_new"
+          android:showAsAction="ifRoom"
+          />
+    <item android:id="@+id/navigate_budgets"
+          android:title="Navigation"
+          android:icon="@drawable/ic_drawer"
+          android:showAsAction="ifRoom"
+            />
+</menu>

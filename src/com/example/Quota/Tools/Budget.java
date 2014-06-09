@@ -35,7 +35,9 @@ public class Budget implements Parcelable {
         name =  in.readString();
         total = in.readDouble();
         remaining = in.readDouble();
+        subBudgets = new ArrayList<Budget>();
         in.readTypedList(subBudgets,Budget.CREATOR);
+        items = new ArrayList<Item>();
         in.readTypedList(items, Item.CREATOR);
     }
 

@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
 
-    <TextView android:id="@+id/item_menu_description"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView android:id="@+id/subBudget_menu_description"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
-              android:text="Add Item"
+              android:text="Add Sub-Budget"
             />
 
-    <LinearLayout android:id="@+id/name"
+    <LinearLayout android:id="@+id/subBudget_name"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:layout_below="@id/item_menu_description"
+                  android:layout_below="@id/subBudget_menu_description"
             >
 
         <TextView android:layout_width="wrap_content"
@@ -25,7 +26,7 @@
                   android:text="Name:"
                 />
 
-        <EditText android:id="@+id/get_name"
+        <EditText android:id="@+id/get_subBudget_name"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
@@ -33,31 +34,33 @@
                 />
     </LinearLayout>
 
-    <LinearLayout android:id="@+id/cost"
+    <LinearLayout android:id="@+id/total"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:layout_below="@id/name"
+                  android:layout_below="@id/subBudget_name"
             >
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:textSize="25sp"
-                  android:text="Cost:"
+                  android:text="Total:"
                 />
 
-        <EditText android:id="@+id/get_cost"
+        <EditText android:id="@+id/get_total"
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
                   android:inputType="numberDecimal"
                 />
-                  </LinearLayout>
+    </LinearLayout>
 
-        <Button android:id="@+id/confirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                />
+    <Button android:id="@+id/confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Add Sub-Budget"
+            android:onClick="addSubBudget"
+            />
 
 
 </RelativeLayout>
